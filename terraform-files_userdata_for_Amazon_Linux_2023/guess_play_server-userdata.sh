@@ -1,4 +1,10 @@
 #! /bin/bash
+
+#If you don't change the FOLDER variable below, you will be pulling the files downloaded to EC2 in userdata from my public repo. 
+#I pushed the same python, dockerfile and docker-compose.yml files to your repo. 
+#If you replace BekirKocabas username in the FOLDER variable below with your own github username, 
+#you will pull your own github files from your repo.
+
 dnf update -y
 hostnamectl set-hostname guess_play_server
 dnf install docker -y
