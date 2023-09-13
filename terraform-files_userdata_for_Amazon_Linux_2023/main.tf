@@ -121,7 +121,7 @@ output "PlayerServerHostname" {
 }
 
 output "PlayerServerPlayGame" {
- value = "YClick to watch the #1 player play and refresh the page to see his next predictions. To watch the other players play, change the player id at the end. http://${aws_instance.guess_play_server.public_ip}:5000/play/1"
+ value = "Click to watch the #1 player play and refresh the page to see his next predictions. To watch the other players play, change the player id at the end. http://${aws_instance.guess_play_server.public_ip}:5000/play/1"
 }
 
 output "GameMasterServerGameResult" {
