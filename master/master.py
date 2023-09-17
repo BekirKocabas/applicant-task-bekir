@@ -10,33 +10,29 @@ app = Flask(__name__)
 # Dictionary to store game sessions for each player
 game_sessions = {}
 player_locks = {}  # Dictionary to store locks for each player
+min_number = 1
+max_number = 1000  
+target_number = random.randint(min_number, max_number)
 
-def play_game(player_id, player_guess):
-    min_number = 1
-    max_number = 1000
-    target_number = random.randint(min_number, max_number)
-    history = []
+def play_game(player_id, player_guess):  
     result = ""
     response = {}
 
     if player_guess < target_number:
-        result = 'higher'
-        min_number = player_guess + 1
+        result = 'higher'        
     elif player_guess > target_number:
         result = 'lower'
-        max_number = player_guess - 1
     else:
-        result = 'won'        
+        result = 'won'       
 
-        response = {
-            'guess': player_guess,
-            'history': history
+    response = {
+            'result': result,
+            'target number' : target_number
         }
-    
-    response['result'] = result
 
     # Store the game session result for the player
     game_sessions[player_id] = response
+    print(f'game session player id: {game_sessions[player_id]}')
 
     # Release the lock when the game session is complete
     player_locks[player_id].release()
@@ -69,5 +65,3 @@ if __name__ == '__main__':
         player_locks[player_id] = threading.Lock()
 
     app.run(host='0.0.0.0', port=5001)
-
-
