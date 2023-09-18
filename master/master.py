@@ -6,12 +6,11 @@ import requests
 app = Flask(__name__)
 
 # Configuration for the range of numbers
-
-# Dictionary to store game sessions for each player
-game_sessions = {}
-player_locks = {}  # Dictionary to store locks for each player
 min_number = 1
-max_number = 1000  
+max_number = 10
+game_sessions = {} # Dictionary to store game sessions for each player
+player_locks = {}  # Dictionary to store locks for each player
+  
 target_number = random.randint(min_number, max_number)
 
 def play_game(player_id, player_guess):  
@@ -58,6 +57,15 @@ def get_game_result(player_id):
 
     result = game_sessions[player_id]
     return jsonify(result), 200
+
+@app.route('/reset_target/<int:player_id>', methods=['GET'])
+def reset_target(player_id):
+    global target_number
+    
+    # Setting a new target    
+    target_number = random.randint(min_number, max_number)
+
+    return f'New target set for Player {player_id}', 200
 
 if __name__ == '__main__':
     # Initialize locks for players
