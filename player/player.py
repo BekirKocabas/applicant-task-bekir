@@ -64,7 +64,7 @@ def reset_play(player_id):
     target_request = requests.get(f'{game_master_url}/reset_target/{player_id}') #Send a request to the Game Master server to request a new target
     
     if target_request.status_code == 200:
-        return f'Game reset for Player {player_id}. New target requested from Game Master.', 200
+        return f'Reset game. New target requested from Game Master.', 200
     else:
         return 'Error communicating with Game Master server', 500
 
